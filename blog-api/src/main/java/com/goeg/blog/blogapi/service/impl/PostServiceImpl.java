@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.goeg.blog.blogapi.dto.PostDto;
 import com.goeg.blog.blogapi.entity.Post;
@@ -21,6 +23,7 @@ public class PostServiceImpl implements PostService{
 		this.postRepository = postRepository;
 	}
 
+	@Transactional
 	@Override
 	public PostDto createPost(PostDto post) {
 		
@@ -46,6 +49,7 @@ public class PostServiceImpl implements PostService{
 		return mapEntityToDto(postObj);
 	}
 
+	@Transactional
 	@Override
 	public PostDto updatePost(PostDto dto, long id) {
 		Post post = postRepository.findById(id).orElseThrow(
@@ -57,6 +61,7 @@ public class PostServiceImpl implements PostService{
 		return  mapEntityToDto(postUpdate);
 	}
 
+	@Transactional
 	@Override
 	public void deletePostById(long id) {
 		Post post = postRepository.findById(id).orElseThrow(
