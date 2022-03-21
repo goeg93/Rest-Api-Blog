@@ -1,14 +1,13 @@
 package com.goeg.blog.blogapi.service;
 
-import java.util.List;
-
 import com.goeg.blog.blogapi.dto.PostDto;
+import com.goeg.blog.blogapi.dto.PostResponse;
 
 public interface PostService {
 
 	PostDto createPost(PostDto post);
 
-	List<PostDto> getAllPost();
+	 PostResponse getAllPost(int pageNo, int pageSize, String sortBy, String sortDir);
 	
 	PostDto getPostById(long id);
 	
