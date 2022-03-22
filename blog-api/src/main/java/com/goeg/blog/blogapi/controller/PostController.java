@@ -1,5 +1,7 @@
 package com.goeg.blog.blogapi.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,7 +32,7 @@ public class PostController {
 
 	//Create blog post rest api	
 	@PostMapping
-	public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto){
+	public ResponseEntity<PostDto> createPost(@Valid @RequestBody PostDto postDto){
 		return new ResponseEntity<>(postService.createPost(postDto),HttpStatus.CREATED);
 		
 	}
