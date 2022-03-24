@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +31,8 @@ public class PostController {
 	}
 
 
-	//Create blog post rest api	
+	//Create blog post rest api
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity<PostDto> createPost(@Valid @RequestBody PostDto postDto){
 		return new ResponseEntity<>(postService.createPost(postDto),HttpStatus.CREATED);
@@ -38,15 +40,7 @@ public class PostController {
 	}
 	
 	
-	//get all post rest api
-	
-	/*@GetMapping
-	public ResponseEntity<List<PostDto>> getAllPost(){
-		List<PostDto> lista =  postService.getAllPost();
-		
-		return new ResponseEntity<List<PostDto>>(lista,HttpStatus.OK);
-	}*/
-	
+
 	@GetMapping
 	public PostResponse getAllPosts(
 			@RequestParam(value="pageNo",defaultValue = "0",required = false) int pageNo,
